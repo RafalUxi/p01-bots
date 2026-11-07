@@ -1,12 +1,12 @@
-import { WebSocketServer } from 'ws';
+import { Server } from 'socket.io';
 
 const port = Number(process.env.PORT ?? 8080);
-const wss = new WebSocketServer({ port });
+const io = new Server(port, { cors: { origin: '*' } });
 
-wss.on('connection', (ws) => {
-  console.log(`client connected (${wss.clients.size} online)`);
-  ws.send(JSON.stringify({ t: 'hello' }));
-  ws.on('close', () => console.log(`client left (${wss.clients.size} online)`));
+io.on('connection', (socket) => {
+  console.log(`connected ${socket.id}`);
+
+  socket.on('disconnect', () => {
+    console.log(`left ${socket.id}`);
+  });
 });
-
-console.log(`ws server on :${port}`);

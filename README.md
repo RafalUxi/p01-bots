@@ -37,8 +37,7 @@ Bots are always labelled `[bot]`. The question: _how long until humans replace 1
 ```bash
 npm install
 cp .env.example .env   # optional, defaults work locally
-npm run dev:server
-npm run dev:client
+npm run dev        # server :8080 + client :5173
 ```
 
 ## Privacy

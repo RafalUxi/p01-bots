@@ -4,24 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>P01 Bots</title>
-    <style>
-      html,
-      body {
-        margin: 0;
-        height: 100%;
-        background: #111;
-        overflow: hidden;
-      }
-      canvas {
-        display: block;
-        width: 100vw;
-        height: 100vh;
-        touch-action: none;
-      }
-    </style>
   </head>
-  <body>
-    <canvas id="game"></canvas>
-    <script type="module" src="./main.ts"></script>
+  <body class="h-dvh overflow-hidden bg-neutral-950 text-neutral-100">
+    <div id="root" class="h-full"></div>
+    <script type="module" src="./main.tsx"></script>
   </body>
 </html>

@@ -8,7 +8,15 @@
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
     "lib": ["ES2022", "DOM"],
+    "jsx": "react-jsx",
     "types": ["node", "vite/client"]
   },
-  "include": ["server", "client", "shared", "vite.config.ts"]
+  "include": [
+    "server",
+    "client",
+    "shared",
+    "vite.config.ts",
+    "client/game_base/map_const.ts",
+    "types/types_map.ts"
+  ]
 }
