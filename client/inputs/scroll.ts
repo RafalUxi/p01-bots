@@ -2,13 +2,12 @@
 
 import { canvas } from '../game_base/base';
 
-export const camera = { x: 0, y: 1 }; // 0.5 -> 2.5?
+export let scroll = 1; // 0.5 -> 2.5?
 const nagetivScrollSens = 500;
 
 function onWheel(e: WheelEvent) {
-  camera.x += e.deltaX;
-  camera.y += e.deltaY * 0.001;
-  camera.y = Math.max(Math.min(camera.y, 2.5), 0.5);
+  scroll += -e.deltaY * 0.001;
+  scroll = Math.max(Math.min(scroll, 2.5), 0.5);
 }
 
 export function addScroll() {
