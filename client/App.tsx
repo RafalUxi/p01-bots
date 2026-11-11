@@ -10,7 +10,7 @@ export function App() {
   useEffect(() => {
     if (!play) return;
     return startGame(canvasRef.current!, setStatus, playerName);
-  }, [play]);
+  }, [play, startGame]);
 
   const start = () => {
     if (playerName.length === 0 || playerName.length > 16) return;
@@ -45,9 +45,6 @@ export function App() {
     return (
       <div className="relative h-full w-screen">
         <canvas ref={canvasRef} className="block h-full w-full touch-none" />
-        <div className="absolute top-4 left-4 rounded bg-black/60 px-3 py-1 font-mono text-lg">
-          {status}
-        </div>
       </div>
     );
   }

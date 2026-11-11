@@ -2,6 +2,12 @@ import { Server } from 'socket.io';
 import { savePlayer } from './db/db';
 import { validateInput } from './validate';
 import { cordsType } from '../types/types';
+import {
+  generateStartMap,
+  normalizePlayerViewToScreen,
+  startPlayerPosition,
+  translateStartMapCordsToPlayerView,
+} from './game/mapEngine';
 
 const port = Number(process.env.PORT ?? 8080);
 const io = new Server(port, { cors: { origin: '*' } });
@@ -22,8 +28,18 @@ io.on('connection', (socket) => {
   // Write player data
   savePlayer.run(playerId, playerName, now, now);
 
+  socket.on('loadStartData', (d) => {
+    console.log('Start?', d);
+    // Here need map and players data
+    const position = startPlayerPosition();
+    const map = normalizePlayerViewToScreen(
+      translateStartMapCordsToPlayerView(generateStartMap(), position),
+      position,
+    );
+    io.to(socket.id).emit('startData', { mapCords: map, startPosition: position });
+  });
+
   socket.on('disconnect', () => {
-    clearInterval(gameLoopIntervalHandler);
     console.log(`left ${playerId}`);
   });
 });

@@ -1,6 +1,6 @@
 // validate handshake data input
 export function validateInput(playerId: string, playerName: string): boolean {
-  if (typeof playerId !== 'string' || playerId.length > 64) {
+  if (typeof playerId !== 'string' || playerId.length > 64 || playerId.length === 0) {
     return false;
   }
 
