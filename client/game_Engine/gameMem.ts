@@ -1,4 +1,4 @@
-import { MapType, ObstaclesType, PlayerCordsType } from '../../types/types';
+import { MapType, ObstaclesType, PlayerCordsType } from '../../global/types';
 
 export let mapCords: MapType[];
 export let playersCords: PlayerCordsType[];

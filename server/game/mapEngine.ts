@@ -1,5 +1,5 @@
-import { type MapType, type vec2, type PlayerCordsType } from '../../types/types';
-import { viewMargin, viewPlayerX, viewPlayerY } from '../../types/viewConst';
+import { type MapType, type vec2, type PlayerCordsType } from '../../global/types';
+import { viewMargin, viewPlayerX, viewPlayerY } from '../../global/viewConst';
 
 // Generate start map
 // Map - 300 x 300 = 90 000 blocks
@@ -16,8 +16,8 @@ export function generateStartMap() {
 // Random start posicion
 // In future -> not-grey blocks
 export function startPlayerPosition(): PlayerCordsType {
-  const xRan = Math.random() * 300;
-  const yRan = Math.random() * 300;
+  const xRan = 2 + Math.random() * 298;
+  const yRan = 2 + Math.random() * 298;
   return { x: xRan, y: yRan, color: 'blue' };
 }
 

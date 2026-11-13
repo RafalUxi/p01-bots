@@ -1,14 +1,7 @@
 import { ctx, h, w } from '../game_base/base';
-import {
-  MAP_HEIGHT,
-  MAP_WIDTH,
-  PLAYER_SIZE,
-  BLOCK_GAP,
-  BLOCK_SIZE,
-  color_map_bg,
-} from '../game_base/map_const';
-import { type PlayerCordsType, type MapType } from '../../types/types';
-import { viewPlayerX, viewPlayerY, viewMargin } from '../../types/viewConst';
+import { PLAYER_SIZE, BLOCK_GAP, BLOCK_SIZE, color_map_bg } from '../game_base/map_const';
+import { type PlayerCordsType, type MapType } from '../../global/types';
+import { viewPlayerX, viewPlayerY, viewMargin } from '../../global/viewConst';
 import { scroll } from '../inputs/scroll';
 
 export function generateMap(map: MapType[]) {

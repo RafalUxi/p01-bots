@@ -24,6 +24,16 @@ export type cordsType = {
   obstaclesCords: ObstaclesType[];
 };
 
+export type playerType = {
+  x: number;
+  y: number;
+  velX?: number;
+  velY?: number;
+  color: string;
+  nick?: string;
+  state?: string;
+};
+
 export type vec2 = {
   x: number;
   y: number;

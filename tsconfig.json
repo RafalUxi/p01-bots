@@ -17,6 +17,6 @@
     "shared",
     "vite.config.ts",
     "client/game_base/map_const.ts",
-    "types/types.ts"
+    "global/types.ts"
   ]
 }

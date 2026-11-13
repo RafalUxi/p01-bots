@@ -1,14 +1,12 @@
-import { io } from 'socket.io-client';
+import { io, type Socket } from 'socket.io-client';
 import { ctx, h, initBase, resize, w } from '../game_base/base';
 import { startLoop } from './loop';
-import { type MapType, ObstaclesType, PlayerCordsType } from '../../types/types';
+import { type MapType, ObstaclesType, PlayerCordsType } from '../../global/types';
 import { generateMap, drawPlayer } from './engine';
 import { playerViewCords, saveMapCords, savePlayerCords, savePlayerViewCords } from './gameMem';
 import { addScroll } from '../inputs/scroll';
-
-let mapCords: MapType[] = [];
-let playersCords: PlayerCordsType[] = [];
-let obstaclesCords: ObstaclesType[] = [];
+import { addMouseDown, addMouseUp, isMouse, mousePosition } from '../inputs/mouse';
+import { changeToFalseIsStartPush, isPush, isStartPush, pushVectorCalculate } from './push/push';
 
 export function startGame(
   canvas: HTMLCanvasElement,
@@ -22,6 +20,9 @@ export function startGame(
 
   // init inputs
   const scrollStop = addScroll();
+  const mouseDownStop = addMouseDown();
+  const mouseDownUpStop = addMouseUp();
+  const pointerStop = mousePosition();
 
   // Take/generate playerId
   let playerId = localStorage.getItem('playerId');
@@ -42,28 +43,33 @@ export function startGame(
     savePlayerViewCords(data.mapCords);
   });
 
-  // event - re-draw map param
-  socket.on('drawMap', (data) => {
-    mapCords = data.mapCords;
-    playersCords = data.playerCords;
-    obstaclesCords = data.obstaclesCords;
-  });
-
   // Game loop (front)
   const stopLoop = startLoop((dt) => {
-    update(dt);
+    update(dt, socket);
     render();
   });
 
   return () => {
     stopLoop();
     scrollStop();
+    mouseDownStop();
+    mouseDownUpStop();
+    pointerStop();
     resizeObserver.disconnect();
     socket.disconnect();
   };
 }
 
-function update(_dt: number) {}
+function update(_dt: number, socket: Socket) {
+  isPush({ x: w / 2, y: h / 2 });
+  if (!isMouse && isStartPush) {
+    changeToFalseIsStartPush();
+    const pushVector = pushVectorCalculate();
+    // now socket connection with vec
+    console.log(pushVector);
+    socket.emit('startPush', pushVector);
+  }
+}
 
 function render() {
   ctx.clearRect(0, 0, w, h);
